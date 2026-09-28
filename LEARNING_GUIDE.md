@@ -23,11 +23,15 @@ Follow the README installation block, then: Open study-room in two tabs. Save in
 
 ## Five interview questions
 
-1. **What problem does this project solve, and what is its unit of work?** Explain shared meeting notes without lost edits, identify study groups as the audience, and trace one concrete example through the files above. Use the demonstration output rather than hypothetical impact.
-2. **Why did you choose the first design decision?** Optimistic integer revisions reject stale saves instead of overwriting another user's draft. Show the corresponding implementation and a test that would fail if that property were removed.
-3. **How do you protect correctness when inputs or execution change?** Server-sent events broadcast saved revisions; heartbeat frames and reconnection keep the client informed. Explain the relevant invalid-input or edge-case test and distinguish a checked property from an untested assumption.
-4. **How do you make results inspectable and reproducible?** Append-only revision metadata records author and update time alongside the latest note. Point to actual outputs and recorded commands. Explain why a successful example is weaker evidence than a tested boundary or independently reconciled total.
-5. **What would you improve before real deployment or real-data use?** Whole-note optimistic editing, not character-level CRDT merging. No authentication or tenancy; anyone with local access to a room can edit. Author names are self-reported. History lists metadata; full historical bodies remain in SQLite. Choose one limitation, describe the missing evidence, and propose a measurable acceptance check rather than promising production readiness.
+1. **Is this simultaneous character-level collaboration?** No. Clients edit a local draft and save the whole note. Server-sent events distribute saved revisions. This provides live saved-note synchronization, not a CRDT or operational transformation editor.
+
+2. **How is a lost update prevented?** Each save includes the revision the editor read. A stale revision is rejected instead of overwriting newer content. The browser retains the rejected draft so the user can reconcile it.
+
+3. **Why choose SSE?** Updates travel from server to clients, while saves use ordinary HTTP requests. SSE fits that one-way notification flow without a bidirectional socket protocol.
+
+4. **How did you test the conflict behavior?** Two actual browser tabs shared a room. One saved a newer revision; the other attempted a stale save. The first edit remained authoritative and the second draft stayed visible.
+
+5. **What is the main security boundary?** Room names and author labels are not identities or access control. A public multi-user deployment needs authentication, room authorization and retention controls.
 
 ## Independent exercise
 
@@ -41,6 +45,6 @@ The implementation was developed with substantial AI assistance under Abhijith V
 
 Suggested factual bullet after personally validating the demo:
 
-- Implemented and validated shared meeting notes without lost edits using Flask · SQLite · SSE, with live saved-note synchronization with sse and documented correctness checks and limitations.
+- Implemented SSE synchronization and revision-based conflict detection for shared notes; verified two-tab synchronization and preservation of rejected drafts.
 
 Use [VERIFICATION.md](VERIFICATION.md) to add only measured numbers. Do not claim production traffic, users, savings, upstream acceptance or cloud deployment without corresponding evidence.
