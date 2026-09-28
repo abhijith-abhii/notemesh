@@ -1,0 +1,9 @@
+{
+  "slug": "notemesh",
+  "fresh_venv": "work/clean-envs/notemesh",
+  "fresh_checkout": "work/clean/notemesh",
+  "passed": true,
+  "failure": null,
+  "runtime": "Python 3.12.14",
+  "model_training": null
+}
