@@ -1,0 +1,61 @@
+{
+  "date_utc": "2026-10-18T10:35:29.174981+00:00",
+  "project": "notemesh",
+  "source_commit": "6267e3ac6535633f39132753b8b98a79bc94221f",
+  "environment": {
+    "os": "Darwin",
+    "os_release": "25.2.0",
+    "architecture": "arm64",
+    "python": "3.12.14",
+    "cpu_count": 12,
+    "server": "Gunicorn 23.0.0, 1 gthread worker, 8 threads"
+  },
+  "scope": "Synthetic local loopback HTTP benchmark. Not production capacity, real users, clinical validation or user growth.",
+  "concurrency": 8,
+  "requests_per_round": 800,
+  "rounds": 3,
+  "warmup_requests": 40,
+  "workload": "50/50 GET/PUT note operations, 8 independent rooms, 2048-character notes, SQLite file database; optimistic revision correctness checked.",
+  "http_rounds": [
+    {
+      "count": 800,
+      "median_ms": 2.189,
+      "p95_ms": 24.322,
+      "min_ms": 0.556,
+      "max_ms": 457.802,
+      "elapsed_seconds": 0.815,
+      "requests_per_second": 981.14,
+      "failed_requests": 0
+    },
+    {
+      "count": 800,
+      "median_ms": 2.301,
+      "p95_ms": 16.402,
+      "min_ms": 0.559,
+      "max_ms": 255.405,
+      "elapsed_seconds": 0.754,
+      "requests_per_second": 1060.34,
+      "failed_requests": 0
+    },
+    {
+      "count": 800,
+      "median_ms": 1.89,
+      "p95_ms": 22.31,
+      "min_ms": 0.51,
+      "max_ms": 201.875,
+      "elapsed_seconds": 0.714,
+      "requests_per_second": 1120.89,
+      "failed_requests": 0
+    }
+  ],
+  "http_summary": {
+    "count": 2400,
+    "median_ms": 2.086,
+    "p95_ms": 22.276,
+    "min_ms": 0.51,
+    "max_ms": 457.802,
+    "median_round_requests_per_second": 1060.34,
+    "failed_requests": 0,
+    "total_measured_requests": 2400
+  }
+}

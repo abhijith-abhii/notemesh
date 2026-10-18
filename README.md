@@ -64,3 +64,7 @@ Suggested extension: Add a read-only revision viewer using the existing history 
 ## Honest portfolio use
 
 This implementation and documentation were developed with substantial Codex assistance. Before presenting it, run the demonstration, explain the design choices, and complete the suggested independent modification. Do not describe generated code as work experience, an accepted upstream contribution, or a deployed production service.
+
+## Local performance measurements
+
+An 8-client local HTTP workload completed **2,400 validated requests**, with **22.276 ms p95 latency**. These are synthetic local measurements, not production users or service guarantees. See the [workload, reproducible script and complete results](benchmarks/README.md).
